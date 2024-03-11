@@ -13,6 +13,15 @@ type Env struct {
 	// * Application
 	AppEnv string `env:"APP_ENV"`
 	Port   string `env:"PORT"`
+
+	// * Database
+	DbHost     string `env:"DB_HOST"`
+	DbUsername string `env:"DB_USERNAME"`
+	DbPassword string `env:"DB_PASSWORD"`
+	DbName     string `env:"DB_NAME"`
+	DbPort     int    `env:"DB_PORT"`
+	DbSslMode  string `env:"DB_SSLMODE"`
+	DbTimeZone string `env:"DB_TIMEZONE"`
 }
 
 func NewEnv() *Env {
