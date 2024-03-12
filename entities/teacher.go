@@ -2,9 +2,11 @@ package entity
 
 import "gorm.io/gorm"
 
-type Student struct {
+type Teacher struct {
 	gorm.Model
 	FirstName string `gorm:"column:first_name"`
 	LastName  string `gorm:"column:last_name"`
-	Grade     string `gorm:"column:grade"`
+	Level     string `gorm:"column:level"`
+
+	Courses []Course `gorm:"many2many:course;"`
 }

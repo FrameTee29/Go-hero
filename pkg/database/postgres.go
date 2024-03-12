@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"gohero/entity"
+	entity "gohero/entities"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

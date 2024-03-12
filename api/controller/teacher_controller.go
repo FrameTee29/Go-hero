@@ -2,18 +2,28 @@ package controller
 
 import (
 	"gohero/bootstrap"
+	"gohero/domain"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 type TeacherController struct {
-	App bootstrap.Application
+	App            bootstrap.Application
+	TeacherUsecase domain.TeacherUsecase
 }
 
 func (cl TeacherController) GetAllTeacher(ctx *gin.Context) {
+	message, err := cl.TeacherUsecase.GetAllTeacher()
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Something went wrong !!",
+		})
+	}
+
 	ctx.JSON(http.StatusOK, gin.H{
-		"message": "All Teacher",
+		"message": message,
 	})
 }
 
