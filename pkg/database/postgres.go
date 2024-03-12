@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"gohero/entity"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -125,6 +126,8 @@ func ConnectPostgresDB(options ...Option) (*Db, error) {
 	}
 
 	db.DriverDb = postgresCon
+
+	db.DriverDb.Migrator().AutoMigrate(entity.User{})
 
 	return &db, nil
 }

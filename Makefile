@@ -7,3 +7,6 @@ init:
 .PHONY: run dev
 run dev:
 	docker compose -f docker-compose.dev.yaml up --build
+
+migrate create:
+	migrate create -ext .go -dir ./migrations -seq create_users_table
