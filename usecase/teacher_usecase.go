@@ -3,7 +3,6 @@ package usecase
 import (
 	"gohero/bootstrap"
 	"gohero/domain"
-	entity "gohero/entities"
 )
 
 type teacherUsecase struct {
@@ -22,7 +21,7 @@ func (uc *teacherUsecase) GetAllTeacher() (string, error) {
 	return "All Teacher Ja", nil
 }
 
-func (uc *teacherUsecase) GetTeacherById(id int) (entity.Teacher, error) {
+func (uc *teacherUsecase) GetTeacherById(id int) (domain.Teacher, error) {
 	teacher, err := uc.teacherRepository.FindOne(id)
 
 	if err != nil {

@@ -3,7 +3,6 @@ package repositories
 import (
 	"gohero/bootstrap"
 	"gohero/domain"
-	entity "gohero/entities"
 )
 
 type teacherRepository struct {
@@ -16,11 +15,11 @@ func NewTeacherRepository(app *bootstrap.Application) domain.TeacherRepository {
 	}
 }
 
-func (r *teacherRepository) FindOne(id int) (entity.Teacher, error) {
+func (r *teacherRepository) FindOne(id int) (domain.Teacher, error) {
 	db := r.app.DB
 	driverDb := db.DriverDb
 
-	teacher := entity.Teacher{}
+	teacher := domain.Teacher{}
 
 	result := driverDb.First(&teacher, id)
 
