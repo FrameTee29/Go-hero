@@ -6,20 +6,35 @@ import (
 )
 
 type authUsecase struct {
-	app *bootstrap.Application
+	app      *bootstrap.Application
+	authRepo domain.AuthRepository
 }
 
-// CheckSession implements domain.AuthUsecase.
-func (uc *authUsecase) CheckSession() (bool, error) {
-	return true, nil
-}
-
-func NewAuthUsecase(app *bootstrap.Application) domain.AuthUsecase {
+func NewAuthUsecase(app *bootstrap.Application, authRepo domain.AuthRepository) domain.AuthUsecase {
 	return &authUsecase{
-		app: app,
+		app:      app,
+		authRepo: authRepo,
 	}
 }
 
 func (uc *authUsecase) SignIn() (string, error) {
 	return "Sign In", nil
+}
+
+// CheckSession implements domain.AuthUsecase.
+func (uc *authUsecase) CheckSessionTimeout() (domain.SessionResponse, error) {
+
+	session := domain.SessionResponse{
+		IsTimeout: false,
+	}
+
+	isTimeout, err := uc.authRepo.CheckSessionTimeout()
+
+	if err != nil {
+		return session, err
+	}
+
+	session.IsTimeout = isTimeout
+
+	return session, nil
 }

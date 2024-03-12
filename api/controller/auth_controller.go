@@ -27,3 +27,17 @@ func (cl AuthController) SignIn(ctx *gin.Context) {
 		"message": message,
 	})
 }
+
+func (cl AuthController) CheckSessionTimeout(ctx *gin.Context) {
+	session, err := cl.AuthUsecase.CheckSessionTimeout()
+
+	if err != nil {
+		responseMessage := domain.ResponseMessage{}
+
+		responseMessage.Message = "Incorrect information"
+
+		ctx.JSON(http.StatusBadRequest, responseMessage)
+	}
+
+	ctx.JSON(http.StatusOK, session)
+}
