@@ -127,7 +127,7 @@ func ConnectPostgresDB(options ...Option) (*Db, error) {
 
 	db.DriverDb = postgresCon
 
-	db.DriverDb.Migrator().AutoMigrate(entity.User{})
+	db.DriverDb.Migrator().AutoMigrate(entity.User{}, entity.Teacher{}, entity.Course{}, entity.Student{})
 
 	return &db, nil
 }

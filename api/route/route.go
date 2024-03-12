@@ -34,6 +34,9 @@ func RouteSetup(app *bootstrap.Application) {
 
 	// * New route each feature
 	NewAuthRoute(router, app)
+	NewCourseRoute(router, app)
+	NewTeacherRoute(router, app)
+	NewStudentRoute(router, app)
 
 	port := fmt.Sprintf(":%s", app.Env.Port)
 
