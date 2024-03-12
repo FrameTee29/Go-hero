@@ -4,6 +4,7 @@ import (
 	"gohero/bootstrap"
 	"gohero/domain"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -28,9 +29,23 @@ func (cl TeacherController) GetAllTeacher(ctx *gin.Context) {
 }
 
 func (cl TeacherController) GetTeacherById(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, gin.H{
-		"message": "Teacher by Id",
-	})
+	idParam := ctx.Param("id")
+
+	id, err := strconv.Atoi(idParam)
+
+	if err != nil {
+		panic("Parse string to int error")
+	}
+
+	message, err := cl.TeacherUsecase.GetTeacherById(id)
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Something went wrong !!",
+		})
+	}
+
+	ctx.JSON(http.StatusOK, message)
 }
 
 func (cl TeacherController) CreateTeacher(ctx *gin.Context) {

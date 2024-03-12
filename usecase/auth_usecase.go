@@ -21,7 +21,6 @@ func (uc *authUsecase) SignIn() (string, error) {
 	return "Sign In", nil
 }
 
-// CheckSession implements domain.AuthUsecase.
 func (uc *authUsecase) CheckSessionTimeout() (domain.SessionResponse, error) {
 
 	session := domain.SessionResponse{

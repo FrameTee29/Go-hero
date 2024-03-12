@@ -3,14 +3,16 @@ package route
 import (
 	"gohero/api/controller"
 	"gohero/bootstrap"
+	"gohero/repositories"
 	"gohero/usecase"
 
 	"github.com/gin-gonic/gin"
 )
 
 func NewTeacherRoute(c *gin.RouterGroup, app *bootstrap.Application) {
+	teacherRepository := repositories.NewTeacherRepository(app)
 
-	teacherUsecase := usecase.NewTeacherUsecase(app)
+	teacherUsecase := usecase.NewTeacherUsecase(app, teacherRepository)
 
 	controller := &controller.TeacherController{App: *app, TeacherUsecase: teacherUsecase}
 
